@@ -4,13 +4,15 @@ from pydantic import BaseModel, field_validator
 
 class Person(BaseModel):
     name: str
+    lname: str
     age: int
 
-    @field_validator("name")
+    # multi-field validator
+    @field_validator("name", "lname")
     def check_name_is_alpha(n):
         if not n.isalpha():
-            raise ValueError
-        return n
+            raise ValueError(f"{n} is incorrectly formed.")
+        return n.title()
     
     @field_validator("age")
     def check_correct_age(n):
@@ -19,10 +21,7 @@ class Person(BaseModel):
         return n
 
 
-
-
-
-juan = Person(name="Juan", age=35)
+juan = Person(name="juan", lname="gaunt", age=35)
 print(juan)
 
     
