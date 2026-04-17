@@ -1,18 +1,12 @@
-"""Pydantic basics"""
+"""Pydantic basics - Validators"""
 
-from pydantic import BaseModel
-from typing import Optional
+from pydantic import BaseModel, field_validator
 
-class User(BaseModel):
+class Person(BaseModel):
     name: str
     age: int
-    induction_passed: bool
-    #years_service: Optional[int] = 0
-    years_service: int | float | str
-    awards: list[str | int]
+
+juan = Person(name="Juan", age=23)
+print(juan)
 
 
-
-user = User(name="Gemma", age="30", induction_passed=True, years_service="una semana", awards=["lv1", "lv2", 4])
-
-print(user)
