@@ -29,3 +29,29 @@ class ItemtoShip(BaseModel):
         return self
 
 item = ItemtoShip(name="juguete", shipping_needed=True, shipping_address="1 punto principal")
+
+
+
+
+
+
+
+
+class File(BaseModel):
+    pass
+
+
+class ItemUpload(BaseModel):
+    type_: str | File
+    path: Optional[str] = None
+
+    @model_validator(mode="after")
+    def path_check(self):
+        if isinstance(self.type_, File) and (self.path is None or not self.path):
+            raise ValueError("No hay camino dado")
+        return self
+
+
+x = ItemUpload(type_=File(), path="mi_camino")
+#x = ItemUpload(type_="Ola")
+print(x)
