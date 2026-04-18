@@ -5,4 +5,12 @@ class User(BaseModel):
     password:str
     confirm_password: str
 
-user = User(password="abc", confirm_password="abc")
+    @model_validator(mode="after")
+    def password_check(self):
+        print(vars(self))
+        if self.password != self.confirm_password:
+            raise ValueError("No coincide.")
+        return self
+
+user = User(password="abc", confirm_password="abcd")
+print(user)
