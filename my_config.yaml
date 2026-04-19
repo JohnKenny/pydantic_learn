@@ -1,0 +1,9 @@
+ app:
+  name: Sensor monitor
+  version: "2.1"
+  user_details:
+    name: Ryn
+    role: software development
+  release_details:
+    version: 1.1.1
+    deployed_to_production: true
